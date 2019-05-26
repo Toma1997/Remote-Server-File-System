@@ -27,9 +27,14 @@ public abstract class Entry {
 
     public String getFullPath(){
         if(this.parent == null){
-            return this.name;
+            return this.name + "/";
         } else {
-            return parent.getFullPath() + "/" + this.name;
+            String path = parent.getFullPath() + "/" + this.name;
+            if(this instanceof Directory){
+                path += "/";
+            }
+            return path;
+
         }
     }
 

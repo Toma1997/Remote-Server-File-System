@@ -21,7 +21,6 @@ public class Client {
 
             Scanner clientInput = new Scanner(System.in);
             String command;
-            String response;
 
             // kolekcija vrednosti korisnika severskog fajl sistema
             HashMap<String, String> mapaKorisnika = new HashMap<>();
@@ -31,6 +30,7 @@ public class Client {
             mapaKorisnika.put("AnaM", "anci4568");
             mapaKorisnika.put("Roberto95", "robi_king23=");
 
+            // logovanje na serverski fajl sistem
             String userName = "";
             String password = "";
             do{
@@ -57,35 +57,41 @@ public class Client {
                 serverInput.println(command);
 
                 if(command.equals("ls")){
-                    response = serverOutput.readLine();
-                    String [] responseList = response.split(",");
-                    for(String elem: responseList){
-                        System.out.println(elem);
+                    String response = serverOutput.readLine().trim();
+                    if(response.equals("No files and directories!")){
+                        System.out.println(response);
+                    } else {
+                        String [] responseList = response.split(",");
+                        for(String elem: responseList){
+                            System.out.println(elem);
+                        }
                     }
 
                 } else if(command.equals("cat")){ // ispis sadrzaja iz fajla
-                    response = serverOutput.readLine();
-                    String [] responseList = response.split(",");
+                    String response = serverOutput.readLine().trim();
+                    String [] responseList = response.split(".");
                     for(String elem: responseList){
                         System.out.println(elem);
                     }
 
-                } else if(command.equals("write")){ // upis sadzraja u fajl (prepisuje postojeci)
-                    response = serverOutput.readLine();
-                    System.out.println(response);
+                } else if(command.equals("write") || command.equals("append")){ // upis sadzraja u fajl (prepisuje postojeci)
+                    String response = serverOutput.readLine().trim();
+                    String [] responseList = response.split(".");
+                    for(String elem: responseList){
+                        System.out.println(elem);
+                    }
+
                     String command2;
                     do{
                         command2 = clientInput.nextLine();
+                        serverInput.println(command2);
                     } while(command2 != "exit_file");
 
-                } else if(!command.equals("exit")){
-                    response = serverOutput.readLine();
+                } else {
+                    String response = serverOutput.readLine();
                     System.out.println(response);
-
                 }
-            }
-
-            while (!command.equals("exit"));
+            } while (!command.equals("exit"));
 
         } catch (IOException e){
             e.printStackTrace();

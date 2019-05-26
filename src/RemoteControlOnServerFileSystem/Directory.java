@@ -13,7 +13,7 @@ public class Directory extends Entry {
     @Override
     public int size() {
         int size = 0;
-        for(Entry e: filesAndSubDirectories){
+        for(Entry e: this.filesAndSubDirectories){
             if(e instanceof Directory) {
                 Directory dir = (Directory) e;
                 size += dir.size();
@@ -27,7 +27,7 @@ public class Directory extends Entry {
     // prikazuje broj fajlova u folderu
     public int numberOfFiles(){
         int count = 0;
-        for(Entry e: filesAndSubDirectories){
+        for(Entry e: this.filesAndSubDirectories){
             if(e instanceof Directory){
                 Directory dir = (Directory) e;
                 count += dir.numberOfFiles();
@@ -39,10 +39,12 @@ public class Directory extends Entry {
     }
 
     // prema imenu izvlaci folder ili fajl
-    public Entry getEntryByName(String name){
-        for(Entry e: filesAndSubDirectories){
+    public Entry getEntryByName(String name, String type){
+        for(Entry e: this.filesAndSubDirectories){
             if(e.getName().equals(name)){
-                return e;
+                if((type.equals("File") && e instanceof File) || (type.equals("Directory") && e instanceof Directory)){
+                    return e;
+                }
             }
         }
         return null;
@@ -53,7 +55,7 @@ public class Directory extends Entry {
         if(!this.entryExists(entry)){
             return false;
         }
-        filesAndSubDirectories.remove(entry);
+        this.filesAndSubDirectories.remove(entry);
         return true;
 
     }
@@ -63,21 +65,34 @@ public class Directory extends Entry {
         if(this.entryExists(entry)){
             return false;
         }
-        filesAndSubDirectories.add(entry);
+        this.filesAndSubDirectories.add(entry);
         return true;
 
     }
 
     // ako vec psotoji isti fajl ili folder
     public boolean entryExists(Entry entry){
-        for(Entry e: filesAndSubDirectories){
+        for(Entry e: this.filesAndSubDirectories){
             if(e.getName().equals(entry.getName())){
-                if(e instanceof File && entry instanceof File || e instanceof Directory && entry instanceof Directory){
+                if((e instanceof File && entry instanceof File) || (e instanceof Directory && entry instanceof Directory)){
                     return true;
                 }
             }
         }
         return false;
+    }
+
+    public Directory changeDirectory(Directory currentDir, String newPath){
+        if(newPath.substring(0, 3).equals("../")){
+            return currentDir.parent;
+        } else {
+            String newDir = "";
+            for(int i = 0; newPath.charAt(i) != '/'; i++){
+                newDir += newPath.charAt(i);
+            }
+            Directory newDirectory = (Directory) currentDir.getEntryByName(newDir, "Directory");
+            return changeDirectory(newDirectory, newPath.substring(newDir.length()));
+        }
     }
 
     protected ArrayList<Entry> getFilesAndSubDirectories(){

@@ -1,7 +1,7 @@
 package RemoteControlOnServerFileSystem;
 
 public class File extends Entry {
-    private String content = "dffdfdfdfdfd,fdfddfdfddffd,gfgfgfgfg,";
+    private String content = "dffdfdfdfdfd.fdfddfdfddffd.gfgfgfgfg.";
     private int size;
 
     public File(String name, Directory parent, int size){
@@ -21,7 +21,7 @@ public class File extends Entry {
         this.lastAccessed = System.currentTimeMillis();
         this.content = content;
         this.lastUpdated = System.currentTimeMillis();
-        this.size = content.length();
+        this.size = content.length() + 200;
     }
 
     public void appendContent(String content){
