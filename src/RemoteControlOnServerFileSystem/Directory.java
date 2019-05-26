@@ -82,16 +82,23 @@ public class Directory extends Entry {
         return false;
     }
 
+    // promeni trenutni direktorijum
     public Directory changeDirectory(Directory currentDir, String newPath){
-        if(newPath.substring(0, 3).equals("../")){
-            return currentDir.parent;
+        if(newPath.length() == 0){
+            return currentDir;
         } else {
-            String newDir = "";
-            for(int i = 0; newPath.charAt(i) != '/'; i++){
-                newDir += newPath.charAt(i);
+            if(newPath.substring(0, 3).equals("../")) { // ako se treba preci nazad na roditeljski folder
+                if(currentDir.parent == null){ // ako je koreni folder trenutni vrati njega
+                    return currentDir;
+                }
+                return changeDirectory(currentDir.parent, newPath.substring(3));
+            } else {
+                Directory newDir = (Directory) currentDir.getEntryByName(newPath.substring(0, newPath.indexOf("/")), "Directory");
+                if(newDir == null){
+                    return currentDir;
+                }
+                return changeDirectory(newDir, newPath.substring(newPath.indexOf("/")+1));
             }
-            Directory newDirectory = (Directory) currentDir.getEntryByName(newDir, "Directory");
-            return changeDirectory(newDirectory, newPath.substring(newDir.length()));
         }
     }
 

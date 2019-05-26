@@ -1,18 +1,23 @@
 package RemoteControlOnServerFileSystem;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public abstract class Entry {
     protected Directory parent;
-    protected long created;
-    protected long lastUpdated;
-    protected long lastAccessed;
+    protected String created;
+    protected String lastUpdated;
+    protected String lastAccessed;
     protected String name;
+
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     public Entry(String name, Directory parent){
         this.name = name;
         this.parent = parent;
-        this.created = System.currentTimeMillis();
-        this.lastUpdated = System.currentTimeMillis();
-        this.lastAccessed = System.currentTimeMillis();
+        this.created = format.format(new Date());
+        this.lastUpdated = format.format(new Date());
+        this.lastAccessed = format.format(new Date());
     }
 
     public boolean delete(){
@@ -29,7 +34,7 @@ public abstract class Entry {
         if(this.parent == null){
             return this.name + "/";
         } else {
-            String path = parent.getFullPath() + "/" + this.name;
+            String path = parent.getFullPath() + this.name;
             if(this instanceof Directory){
                 path += "/";
             }
@@ -39,15 +44,15 @@ public abstract class Entry {
     }
 
     // Geteri i seteri
-    public long getCreationTime(){
+    public String getCreationTime(){
         return this.created;
     }
 
-    public long getLastUpdatedTime(){
+    public String getLastUpdatedTime(){
         return this.lastUpdated;
     }
 
-    public long getLastAccessedTime(){
+    public String getLastAccessedTime(){
         return this.lastAccessed;
     }
 

@@ -87,6 +87,14 @@ public class Client {
                         serverInput.println(command2);
                     } while(command2 != "exit_file");
 
+                } else if(command.equals("details")){
+                    String response = serverOutput.readLine().trim();
+                    String [] responseList = response.split(",");
+                    System.out.println("File details:");
+                    for(String elem: responseList){
+                        System.out.println(elem);
+                    }
+
                 } else {
                     String response = serverOutput.readLine();
                     System.out.println(response);

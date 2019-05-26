@@ -222,8 +222,25 @@ public class RemoteController extends  Thread{
                             if(totalCommands.length < 2){
                                 serverOutput.println("Specify the new path to change location!");
                             } else {
-                                currentDirectory = currentDirectory.changeDirectory(currentDirectory, totalCommands[1]);
+                                if (totalCommands[1].charAt(totalCommands[1].length() - 1) != '/') {
+                                    serverOutput.println("Put / at the end of new path");
+                                } else {
+                                    currentDirectory = currentDirectory.changeDirectory(currentDirectory, totalCommands[1]);
+                                    serverOutput.println("Your current location has changed!");
+                                }
+                            }
+                            break;
 
+                        case "details":
+                            if(totalCommands.length < 2){
+                                serverOutput.println("Specify the file!");
+                            } else {
+                                File file6 = (File) currentDirectory.getEntryByName(totalCommands[1], "File");
+                                if (file6 != null) {
+                                    serverOutput.println(file6.getCreationTime() + "," + file6.getLastAccessedTime() + "," + file6.getLastUpdatedTime() + ",");
+                                } else {
+                                    serverOutput.println("File " + totalCommands[1] + " is not found!");
+                                }
                             }
                             break;
 
