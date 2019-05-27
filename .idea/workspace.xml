@@ -3,12 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="199b25bd-2a78-4365-9e40-176a6211e98f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RemoteControlOnServerFileSystem/RemoteControlOnServerFileSystem/RemoteController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RemoteControlOnServerFileSystem/RemoteControlOnServerFileSystem/RemoteController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/RemoteControlOnServerFileSystem/RemoteControlOnServerFileSystem/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RemoteControlOnServerFileSystem/RemoteControlOnServerFileSystem/Client.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/RemoteControlOnServerFileSystem/RemoteControlOnServerFileSystem/Directory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RemoteControlOnServerFileSystem/RemoteControlOnServerFileSystem/Directory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/RemoteControlOnServerFileSystem/RemoteControlOnServerFileSystem/File.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RemoteControlOnServerFileSystem/RemoteControlOnServerFileSystem/File.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RemoteControlOnServerFileSystem/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RemoteControlOnServerFileSystem/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RemoteControlOnServerFileSystem/Directory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RemoteControlOnServerFileSystem/Directory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RemoteControlOnServerFileSystem/Entry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RemoteControlOnServerFileSystem/Entry.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RemoteControlOnServerFileSystem/File.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RemoteControlOnServerFileSystem/File.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RemoteControlOnServerFileSystem/RemoteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RemoteControlOnServerFileSystem/RemoteController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -18,8 +18,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="DefaultGradleProjectSettings">
-    <option name="testRunner" value="GRADLE" />
-    <option name="delegatedBuild" value="true" />
+    <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
     <leaf />
@@ -38,10 +37,10 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/RemoteControlOnServerFileSystem/MultiThreadServer.java" />
-        <option value="$PROJECT_DIR$/src/RemoteControlOnServerFileSystem/RemoteController.java" />
         <option value="$PROJECT_DIR$/src/RemoteControlOnServerFileSystem/Entry.java" />
-        <option value="$PROJECT_DIR$/src/RemoteControlOnServerFileSystem/File.java" />
         <option value="$PROJECT_DIR$/src/RemoteControlOnServerFileSystem/Directory.java" />
+        <option value="$PROJECT_DIR$/src/RemoteControlOnServerFileSystem/RemoteController.java" />
+        <option value="$PROJECT_DIR$/src/RemoteControlOnServerFileSystem/File.java" />
         <option value="$PROJECT_DIR$/src/RemoteControlOnServerFileSystem/Client.java" />
       </list>
     </option>
@@ -57,19 +56,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="RemoteControlOnServerFileSystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Mini projekat 1" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -145,11 +134,12 @@
       <workItem from="1558877271685" duration="416000" />
       <workItem from="1558884068242" duration="11802000" />
       <workItem from="1558904171127" duration="8183000" />
+      <workItem from="1558950646775" duration="3638000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53069000" />
+    <option name="totallyTimeSpent" value="56707000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -161,9 +151,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="0" y="23" width="1440" height="812" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4978355" visible="true" weight="0.10341151" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4978355" visible="true" weight="0.18240343" />
       <window_info id="Structure" order="1" sideWeight="0.5021645" side_tool="true" weight="0.1881663" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -172,7 +162,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.37770563" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.34166667" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3986111" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -236,49 +226,8 @@
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_121/src.zip!/java/util/Scanner.java" />
     <entry file="file://$PROJECT_DIR$/src/RemoteControlOnServerFileSystem/Entry.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="28" lean-forward="true" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/RemoteControlOnServerFileSystem/File.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="34" column="52" selection-start-line="34" selection-start-column="52" selection-end-line="34" selection-end-column="52" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/RemoteControlOnServerFileSystem/Directory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="638">
-          <caret line="99" column="45" selection-start-line="99" selection-start-column="45" selection-end-line="99" selection-end-column="45" />
-          <folding>
-            <element signature="e#3294#3295#0" expanded="true" />
-            <element signature="e#3344#3345#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/RemoteControlOnServerFileSystem/Client.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret line="65" column="53" selection-start-line="65" selection-start-column="53" selection-end-line="65" selection-end-column="53" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/RemoteControlOnServerFileSystem/RemoteController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="127" column="30" selection-start-line="127" selection-start-column="30" selection-end-line="127" selection-end-column="30" />
+        <state relative-caret-position="301">
+          <caret line="39" column="13" lean-forward="true" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -287,8 +236,45 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/RemoteControlOnServerFileSystem/MultiThreadServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+        <state relative-caret-position="90">
+          <caret line="6" column="32" lean-forward="true" selection-start-line="6" selection-start-column="32" selection-end-line="6" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/RemoteControlOnServerFileSystem/File.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="24" column="43" lean-forward="true" selection-start-line="24" selection-start-column="43" selection-end-line="24" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/RemoteControlOnServerFileSystem/Directory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="84" column="36" lean-forward="true" selection-start-line="84" selection-start-column="36" selection-end-line="84" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/RemoteControlOnServerFileSystem/RemoteController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="331">
+          <caret line="148" column="73" selection-start-line="148" selection-start-column="73" selection-end-line="148" selection-end-column="73" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/RemoteControlOnServerFileSystem/Client.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="447">
+          <caret line="97" column="21" lean-forward="true" selection-start-line="97" selection-start-column="21" selection-end-line="97" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

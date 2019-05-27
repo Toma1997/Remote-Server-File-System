@@ -93,6 +93,7 @@ public class Directory extends Entry {
                 }
                 return changeDirectory(currentDir.parent, newPath.substring(3));
             } else {
+                // izvuci samo ime sledeceg foldera
                 Directory newDir = (Directory) currentDir.getEntryByName(newPath.substring(0, newPath.indexOf("/")), "Directory");
                 if(newDir == null){
                     return currentDir;
