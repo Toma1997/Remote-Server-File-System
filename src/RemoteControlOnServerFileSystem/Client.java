@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -73,7 +71,7 @@ public class Client {
                     String response = serverOutput.readLine().trim();
                     String [] responseList = response.split(",");
                     for(String elem: responseList){
-                        System.out.println(responseList.length);
+                        System.out.println(elem);
                     }
 
                 } else if(command.equals("write") || command.equals("append")){ // upis sadzraja u fajl (prepisuje postojeci)
