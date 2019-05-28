@@ -160,18 +160,20 @@ public class RemoteController extends  Thread{
                             } else {
                                 File file3 = (File) currentDirectory.getEntryByName(totalCommands[1], "File");
                                 if (file3 != null) {
-                                    String content1 = file3.getContents();
-                                    serverOutput.println("File is opened for writing! to save enter: save_file, to exit enter: exit_file." + content1);
+                                    String content1 = "";
+                                    serverOutput.println("File is opened for writing! to save enter: save_file, to exit enter: exit_file.");
                                     String command2;
                                     do {
                                         command2 = serverInput.readLine();
                                         if (command2.equals("save_file")) {
                                             file3.setContent(content1);
+                                            serverOutput.println("File is overwritten with new content!");
                                         } else if (!command2.equals("exit_file")) {
-                                            content1 += command2;
+                                            content1 += command2 + "/;";
                                         }
 
                                     } while (!command2.equals("exit_file"));
+                                    serverOutput.println("Exited the file!");
 
                                 } else {
                                     serverOutput.println("File " + totalCommands[1] + " is not found!");
@@ -185,18 +187,20 @@ public class RemoteController extends  Thread{
                             } else {
                                 File file4 = (File) currentDirectory.getEntryByName(totalCommands[1], "File");
                                 if (file4 != null) {
-                                    String content2 = file4.getContents();
-                                    serverOutput.println("File is opened for appending! to save enter: save_file, to exit enter: exit_file." + content2);
+                                    String content2 = "";
+                                    serverOutput.println("File is opened for appending! to save enter: save_file, to exit enter: exit_file.");
                                     String command3;
                                     do {
                                         command3 = serverInput.readLine();
                                         if (command3.equals("save_file")) {
                                             file4.appendContent(content2);
+                                            serverOutput.println("Appended new content!");
                                         } else if (!command3.equals("exit_file")) {
-                                            content2 += command3;
+                                            content2 += command3 + "/;";
                                         }
 
                                     } while (!command3.equals("exit_file"));
+                                    serverOutput.println("Exited the file!");
 
                                 } else {
                                     serverOutput.println("File " + totalCommands[1] + " is not found!");
@@ -210,7 +214,7 @@ public class RemoteController extends  Thread{
                             } else {
                                 File file5 = (File) currentDirectory.getEntryByName(totalCommands[1], "File");
                                 if (file5 != null) {
-                                     file5.changeName(totalCommands[2]);
+                                    file5.changeName(totalCommands[2]);
                                     serverOutput.println("File " + totalCommands[1] + " changed name to " + totalCommands[2]);
                                 } else {
                                     serverOutput.println("File " + totalCommands[1] + " is not found!");
@@ -237,9 +241,61 @@ public class RemoteController extends  Thread{
                             } else {
                                 File file6 = (File) currentDirectory.getEntryByName(totalCommands[1], "File");
                                 if (file6 != null) {
-                                    serverOutput.println(file6.getCreationTime() + "," + file6.getLastAccessedTime() + "," + file6.getLastUpdatedTime() + ",");
+                                    serverOutput.println("File created: "+file6.getCreationTime()+",File last accessed: "+file6.getLastAccessedTime()+",File last updated: "+file6.getLastUpdatedTime()+",");
                                 } else {
                                     serverOutput.println("File " + totalCommands[1] + " is not found!");
+                                }
+                            }
+                            break;
+
+                        case "mv":
+                            if(totalCommands.length < 3){
+                                serverOutput.println("Specify the name and new location of the entry!");
+                            } else {
+                                File file7 = (File) currentDirectory.getEntryByName(totalCommands[1], "File");
+                                Directory dir2 = (Directory) currentDirectory.getEntryByName(totalCommands[1], "Directory");
+                                if (file7 != null) {
+                                    if(currentDirectory.moveEntry(currentDirectory, file7, totalCommands[2])){
+                                        serverOutput.println("File " + totalCommands[1] + " is moved to another location!");
+                                    } else {
+                                        serverOutput.println("File " + totalCommands[1] + " is not moved to another location!");
+                                    }
+
+                                } else if (dir2 != null) {
+                                    if(currentDirectory.moveEntry(currentDirectory, dir2, totalCommands[2])){
+                                        serverOutput.println("Directory " + totalCommands[1] + " is moved to another location!");
+                                    } else {
+                                        serverOutput.println("Directory " + totalCommands[1] + " is not moved to another location!");
+                                    }
+
+                                } else {
+                                    serverOutput.println("Entry " + totalCommands[1] + " is not found!");
+                                }
+                            }
+                            break;
+
+                        case "cp":
+                            if(totalCommands.length < 3){
+                                serverOutput.println("Specify the name and new location of the entry!");
+                            } else {
+                                File file8 = (File) currentDirectory.getEntryByName(totalCommands[1], "File");
+                                Directory dir3 = (Directory) currentDirectory.getEntryByName(totalCommands[1], "Directory");
+                                if (file8 != null) {
+                                    if(currentDirectory.copyEntry(currentDirectory, file8, totalCommands[2])){
+                                        serverOutput.println("File " + totalCommands[1] + " is copied to another location!");
+                                    } else {
+                                        serverOutput.println("File " + totalCommands[1] + " is not copied to another location!");
+                                    }
+
+                                } else if (dir3 != null) {
+                                    if(currentDirectory.copyEntry(currentDirectory, dir3, totalCommands[2])){
+                                        serverOutput.println("Directory " + totalCommands[1] + " is copied to another location!");
+                                    } else {
+                                        serverOutput.println("Directory " + totalCommands[1] + " is not copied to another location!");
+                                    }
+
+                                } else {
+                                    serverOutput.println("Entry " + totalCommands[1] + " is not found!");
                                 }
                             }
                             break;

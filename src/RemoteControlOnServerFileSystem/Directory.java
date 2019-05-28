@@ -103,6 +103,35 @@ public class Directory extends Entry {
         }
     }
 
+    public boolean moveEntry(Directory currentDir, Entry movingEntry, String newPath){
+        if(!currentDir.deleteEntry(movingEntry)){
+            return false;
+        }
+        Directory newParentDirectory = changeDirectory(currentDir, newPath);
+        if(!newParentDirectory.addEntry(movingEntry)){
+            return false;
+        }
+        return true;
+    }
+
+    public boolean copyEntry(Directory currentDir, Entry copyingEntry, String newPath){
+        Directory newParentDirectory = changeDirectory(currentDir, newPath);
+        if(copyingEntry instanceof File){
+            File copyFile = new File(copyingEntry.getName(), newParentDirectory, 200);
+            if(!newParentDirectory.addEntry(copyFile)){
+                return false;
+            }
+        } else {
+            Directory copyDir = new Directory(copyingEntry.getName(), newParentDirectory);
+            copyingEntry = (Directory) copyingEntry;
+            copyDir.filesAndSubDirectories = ((Directory) copyingEntry).getFilesAndSubDirectories();
+            if(!newParentDirectory.addEntry(copyDir)){
+                return false;
+            }
+        }
+        return true;
+    }
+
     protected ArrayList<Entry> getFilesAndSubDirectories(){
         return this.filesAndSubDirectories;
     }

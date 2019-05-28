@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class File extends Entry {
-    private String content = "dffdfdfdfdfd,fdfddfdfddffd,gfgfgfgfg,aaaaaaaaaadfgf,dfgfgfggfggffdsfs,fgd,gfdg,fdgf,dgfd,gfdgfdfgdfdsgfd";
+    private String content = "";
     private int size;
 
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

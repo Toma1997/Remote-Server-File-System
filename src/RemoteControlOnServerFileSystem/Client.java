@@ -55,6 +55,7 @@ public class Client {
                 System.out.println("Enter command to be executed on your File System: ");
                 command = clientInput.nextLine();
                 serverInput.println(command);
+                String [] commands = command.split(" ");
 
                 if(command.equals("ls")){
                     String response = serverOutput.readLine().trim();
@@ -67,30 +68,32 @@ public class Client {
                         }
                     }
 
-                } else if(command.equals("cat")){ // ispis sadrzaja iz fajla
+                } else if(commands[0].equals("cat")){ // ispis sadrzaja iz fajla
                     String response = serverOutput.readLine().trim();
-                    String [] responseList = response.split(",");
+                    String [] responseList = response.split("/;");
                     for(String elem: responseList){
                         System.out.println(elem);
                     }
 
-                } else if(command.equals("write") || command.equals("append")){ // upis sadzraja u fajl (prepisuje postojeci)
+                } else if(commands[0].equals("write") || commands[0].equals("append")){ // upis sadzraja u fajl (prepisuje postojeci)
                     String response = serverOutput.readLine().trim();
-                    String [] responseList = response.split(".");
-                    for(String elem: responseList){
-                        System.out.println(elem);
+                    System.out.println(response);
+                    if(response.substring(0, 14).equals("File is opened")){
+                        String command2;
+                        do{
+                            command2 = clientInput.nextLine();
+                            serverInput.println(command2);
+                            if(command2.equals("save_file")){
+                                System.out.println(serverOutput.readLine());
+                            }
+
+                        } while(!command2.equals("exit_file"));
+                        System.out.println(serverOutput.readLine());
                     }
 
-                    String command2;
-                    do{
-                        command2 = clientInput.nextLine();
-                        serverInput.println(command2);
-                    } while(command2 != "exit_file");
-
-                } else if(command.equals("details")){
+                } else if(commands[0].equals("details")){
                     String response = serverOutput.readLine().trim();
                     String [] responseList = response.split(",");
-                    System.out.println("File details:");
                     for(String elem: responseList){
                         System.out.println(elem);
                     }
