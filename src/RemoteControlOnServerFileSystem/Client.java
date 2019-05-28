@@ -22,13 +22,6 @@ public class Client {
             Scanner clientInput = new Scanner(System.in);
             String command;
 
-            // kolekcija vrednosti korisnika severskog fajl sistema
-            HashMap<String, String> mapaKorisnika = new HashMap<>();
-            mapaKorisnika.put("Toma97", "toma1997+");
-            mapaKorisnika.put("Markoni", "mare+123!");
-            mapaKorisnika.put("Nidza12", "tacrqwe+_12");
-            mapaKorisnika.put("AnaM", "anci4568");
-            mapaKorisnika.put("Roberto95", "robi_king23=");
 
             // logovanje na serverski fajl sistem
             String userName = "";
@@ -40,16 +33,17 @@ public class Client {
                 System.out.println("Enter your password:");
                 password = clientInput.nextLine().trim();
 
-                if(!mapaKorisnika.containsKey(userName) || !mapaKorisnika.get(userName).equals(password)){
-                    System.out.println("Wrong login. Try again!");
-                } else if (mapaKorisnika.containsKey(userName) && mapaKorisnika.get(userName).equals(password)){
+                serverInput.println(userName + "," + password);
+                String response = serverOutput.readLine();
+                if(response.equals("Correct!")){
                     break;
+                } else {
+                    System.out.println(response);
                 }
 
             } while (true);
 
             System.out.println("You are logged in!");
-            serverInput.println(userName); // slanje imena za kreiranje root foldera
 
             do{
                 System.out.println("Enter command to be executed on your File System: ");
@@ -68,7 +62,7 @@ public class Client {
                         }
                     }
 
-                } else if(commands[0].equals("cat")){ // ispis sadrzaja iz fajla
+                } else if(commands[0].equals("cat") || commands[0].equals("help")){ // ispis sadrzaja iz fajla
                     String response = serverOutput.readLine().trim();
                     String [] responseList = response.split("/;");
                     for(String elem: responseList){

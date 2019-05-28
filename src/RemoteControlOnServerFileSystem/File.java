@@ -1,13 +1,10 @@
 package RemoteControlOnServerFileSystem;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class File extends Entry {
     private String content = "";
     private int size;
-
-    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     public File(String name, Directory parent, int size){
         super(name, parent);

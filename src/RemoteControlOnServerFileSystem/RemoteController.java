@@ -8,14 +8,17 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class RemoteController extends  Thread{
 
     private Socket socket;
     private Directory fileSystemRoot;
+    private HashMap<String, String> mapaKorisnika;
 
-    public RemoteController(Socket socket){
+    public RemoteController(Socket socket, HashMap mapa){
         this.socket=socket;
+        this.mapaKorisnika = mapa;
     }
 
     @Override
@@ -28,10 +31,19 @@ public class RemoteController extends  Thread{
             BufferedReader serverInput = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter serverOutput = new PrintWriter(socket.getOutputStream(),true); // tok za izlaz servera prema klijentu za odogovore
 
-            String userName = serverInput.readLine();
+            String [] loginList; // login podaci sto se salju od klijenta
+            do{
+                loginList = serverInput.readLine().trim().split(",");
+                if(!this.mapaKorisnika.containsKey(loginList[0]) || !this.mapaKorisnika.get(loginList[0]).equals(loginList[1])){
+                    serverOutput.println("Wrong login. Try again!");
+                } else if (this.mapaKorisnika.containsKey(loginList[0]) && this.mapaKorisnika.get(loginList[0]).equals(loginList[1])){
+                    serverOutput.println("Correct!");
+                    break;
+                }
+            } while (true);
 
             // svaki korsinik ima svoj root folder fajl sistema
-            fileSystemRoot = new Directory(userName, null);
+            fileSystemRoot = new Directory(loginList[0], null);
             Directory currentDirectory = fileSystemRoot;
             while (true){
 
@@ -51,7 +63,7 @@ public class RemoteController extends  Thread{
 
                         case "num_files":
                             int numOfFilesInDir = currentDirectory.numberOfFiles();
-                            serverOutput.println("Broj fajlova u trenutnom folderu: " + numOfFilesInDir);
+                            serverOutput.println("Number of files: " + numOfFilesInDir);
                             break;
 
                         case "ls":
@@ -74,12 +86,17 @@ public class RemoteController extends  Thread{
                             if(totalCommands.length < 2){
                                 serverOutput.println("Specify the file!");
                             } else {
-                                File file = new File(totalCommands[1], currentDirectory, 200);
-                                if(currentDirectory.addEntry(file)){
-                                    serverOutput.println("File " + totalCommands[1] + " is successfully created!");
+                                if(totalCommands[1].matches("[A-z]+[A-z0-9]*([.-]?[A-z0-9])*")){ // regex za naziv fajla
+                                    File file = new File(totalCommands[1], currentDirectory, 200);
+                                    if(currentDirectory.addEntry(file)){
+                                        serverOutput.println("File " + totalCommands[1] + " is successfully created!");
+                                    } else {
+                                        serverOutput.println("File " + totalCommands[1] + " already exists!");
+                                    }
                                 } else {
-                                    serverOutput.println("File " + totalCommands[1] + " already exists!");
+                                    serverOutput.println("Name of the file should begin with alphabet chars and can only have . and - wildchars!");
                                 }
+
                             }
                             break;
 
@@ -104,12 +121,18 @@ public class RemoteController extends  Thread{
                             if(totalCommands.length < 2){
                                 serverOutput.println("Specify the directory!");
                             } else {
-                                Directory dir = new Directory(totalCommands[1], currentDirectory);
-                                if (currentDirectory.addEntry(dir)) {
-                                    serverOutput.println("Directory " + totalCommands[1] + " is successfully created!");
+                                if(totalCommands[1].matches("[A-z]+[A-z0-9]*([.-]?[A-z0-9])*")){
+                                    Directory dir = new Directory(totalCommands[1], currentDirectory);
+                                    if (currentDirectory.addEntry(dir)) {
+                                        serverOutput.println("Directory " + totalCommands[1] + " is successfully created!");
+                                    } else {
+                                        serverOutput.println("Directory " + totalCommands[1] + " already exists!");
+                                    }
                                 } else {
-                                    serverOutput.println("Directory " + totalCommands[1] + " already exists!");
+                                    serverOutput.println("Name of the directory should begin with alphabet chars and can only have . and - wildchars!");
+
                                 }
+
                             }
                             break;
 
@@ -300,8 +323,29 @@ public class RemoteController extends  Thread{
                             }
                             break;
 
+                        case "help":
+                            String helpString = "- pwd : Print current directory location /;";
+                            helpString += "- num_files : Number of files in current directory, recursevly /;";
+                            helpString += "- ls : List all files and directories in current directory /;";
+                            helpString += "- touch <file_name> : create empty file /;";
+                            helpString += "- rm <file_name> : remove file /;";
+                            helpString += "- mkdir <directory_name> : create directory /;";
+                            helpString += "- rmdir <directory_name> : remove directory, and everything in it /;";
+                            helpString += "- cat <file_name> : Print file content /;";
+                            helpString += "- write <file_name : Write or overwrite file content /;";
+                            helpString += "- append <file_name> : Append new content to file /;";
+                            helpString += "- rename <old_file_name> <new_file_name : Rename file with new name /;";
+                            helpString += "- cd <new_relative_path> : Change current location by giving relative path /;";
+                            helpString += "- details <file_name> : File details /;";
+                            helpString += "- mv <entry_name> <new_relative_path> : Move file or directory to a new location /;";
+                            helpString += "- cp <entry_name> <another_relative_path> : Copy file or directory to another location /;";
+                            helpString += "- exit : Disconnect from the server /;";
+
+                            serverOutput.println(helpString);
+
+
                         default:
-                            serverOutput.println("There is no such command in this file system!");
+                            serverOutput.println("There is no such command in this file system! Type 'help' to see commands");
                             break;
                     }
                 }

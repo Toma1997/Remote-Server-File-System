@@ -87,7 +87,7 @@ public class Directory extends Entry {
         if(newPath.length() == 0){
             return currentDir;
         } else {
-            if(newPath.substring(0, 3).equals("../")) { // ako se treba preci nazad na roditeljski folder
+            if(newPath.length() == 3 && newPath.substring(0, 3).equals("../")) { // ako se treba preci nazad na roditeljski folder
                 if(currentDir.parent == null){ // ako je koreni folder trenutni vrati njega
                     return currentDir;
                 }
