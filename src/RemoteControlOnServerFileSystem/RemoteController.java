@@ -252,8 +252,13 @@ public class RemoteController extends  Thread{
                                 if (totalCommands[1].charAt(totalCommands[1].length() - 1) != '/') {
                                     serverOutput.println("Put / at the end of new path");
                                 } else {
-                                    currentDirectory = currentDirectory.changeDirectory(currentDirectory, totalCommands[1]);
-                                    serverOutput.println("Your current location has changed!");
+                                    Directory temp = currentDirectory.changeDirectory(currentDirectory, totalCommands[1]);
+                                    if(temp != null){
+                                        currentDirectory = temp;
+                                        serverOutput.println("Your current location has changed!");
+                                    } else {
+                                        serverOutput.println("Specified path doesn't exist!");
+                                    }
                                 }
                             }
                             break;
@@ -281,14 +286,14 @@ public class RemoteController extends  Thread{
                                     if(currentDirectory.moveEntry(currentDirectory, file7, totalCommands[2])){
                                         serverOutput.println("File " + totalCommands[1] + " is moved to another location!");
                                     } else {
-                                        serverOutput.println("File " + totalCommands[1] + " is not moved to another location!");
+                                        serverOutput.println("File " + totalCommands[1] + " is not moved!");
                                     }
 
                                 } else if (dir2 != null) {
                                     if(currentDirectory.moveEntry(currentDirectory, dir2, totalCommands[2])){
                                         serverOutput.println("Directory " + totalCommands[1] + " is moved to another location!");
                                     } else {
-                                        serverOutput.println("Directory " + totalCommands[1] + " is not moved to another location!");
+                                        serverOutput.println("Directory " + totalCommands[1] + " is not moved!");
                                     }
 
                                 } else {
@@ -307,14 +312,14 @@ public class RemoteController extends  Thread{
                                     if(currentDirectory.copyEntry(currentDirectory, file8, totalCommands[2])){
                                         serverOutput.println("File " + totalCommands[1] + " is copied to another location!");
                                     } else {
-                                        serverOutput.println("File " + totalCommands[1] + " is not copied to another location!");
+                                        serverOutput.println("File " + totalCommands[1] + " is not copied!");
                                     }
 
                                 } else if (dir3 != null) {
                                     if(currentDirectory.copyEntry(currentDirectory, dir3, totalCommands[2])){
                                         serverOutput.println("Directory " + totalCommands[1] + " is copied to another location!");
                                     } else {
-                                        serverOutput.println("Directory " + totalCommands[1] + " is not copied to another location!");
+                                        serverOutput.println("Directory " + totalCommands[1] + " is not copied!");
                                     }
 
                                 } else {

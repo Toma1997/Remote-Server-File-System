@@ -88,15 +88,15 @@ public class Directory extends Entry {
             return currentDir;
         } else {
             if(newPath.length() == 3 && newPath.substring(0, 3).equals("../")) { // ako se treba preci nazad na roditeljski folder
-                if(currentDir.parent == null){ // ako je koreni folder trenutni vrati njega
-                    return currentDir;
+                if(currentDir.parent == null){ // ako je koreni folder trenutni
+                    return null;
                 }
                 return changeDirectory(currentDir.parent, newPath.substring(3));
             } else {
                 // izvuci samo ime sledeceg foldera
                 Directory newDir = (Directory) currentDir.getEntryByName(newPath.substring(0, newPath.indexOf("/")), "Directory");
                 if(newDir == null){
-                    return currentDir;
+                    return null;
                 }
                 return changeDirectory(newDir, newPath.substring(newPath.indexOf("/")+1));
             }
@@ -104,10 +104,16 @@ public class Directory extends Entry {
     }
 
     public boolean moveEntry(Directory currentDir, Entry movingEntry, String newPath){
+
+        Directory newParentDirectory = changeDirectory(currentDir, newPath);
+        if(newParentDirectory == null){
+            return false;
+        }
+
         if(!currentDir.deleteEntry(movingEntry)){
             return false;
         }
-        Directory newParentDirectory = changeDirectory(currentDir, newPath);
+
         if(!newParentDirectory.addEntry(movingEntry)){
             return false;
         }
@@ -116,6 +122,9 @@ public class Directory extends Entry {
 
     public boolean copyEntry(Directory currentDir, Entry copyingEntry, String newPath){
         Directory newParentDirectory = changeDirectory(currentDir, newPath);
+        if(newParentDirectory == null){
+            return false;
+        }
         if(copyingEntry instanceof File){
             File copyFile = new File(copyingEntry.getName(), newParentDirectory, 200);
             if(!newParentDirectory.addEntry(copyFile)){
